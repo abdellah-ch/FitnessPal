@@ -14,7 +14,7 @@ const MainPage = async () => {
     const user = await CheckUser();//current user in the mysql database 
 
     return (
-        <div className="max-w-[992px] mr-auto ml-auto">
+        <div className="">
             <InitialComponent />
         </div>
     );
