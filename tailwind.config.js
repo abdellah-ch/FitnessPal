@@ -50,9 +50,7 @@ module.exports = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
-                backgroundImage: {
-                    //'hero': "url('@/public/landing-bg.svg')",
-                }
+
             },
             borderRadius: {
                 lg: "var(--radius)",
