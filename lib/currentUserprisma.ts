@@ -9,8 +9,13 @@ import { User} from "firebase/auth";
     const session = cookieStore.get("session")?.value.toString();
     if(session){
     //get the user using session
-    const user = await auth.verifySessionCookie(session,true)
-    return user;
+    try {
+     const user = await auth.verifySessionCookie(session,true)
+    return user;   
+    } catch (error) {
+     console.error(error)   
+    }
+    
     }
     
     return null;

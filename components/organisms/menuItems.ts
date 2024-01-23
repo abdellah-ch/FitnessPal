@@ -13,23 +13,23 @@ export let menu = [
                 },
                 {
                     name: "Check-In",
-                    path: "/account/check-in"
+                    path: "/account/CheckIn"
                 },
                 {
                     name: "Mail",
-                    path: "/account/mail"
+                    path: "/account/Mail"
                 },
                 {
                     name: "Profile",
-                    path: "/account/profile"
+                    path: "/account/Profile"
                 },
                 {
                     name: "Friends",
-                    path: "/account/friends"
+                    path: "/account/Friends"
                 },
                 {
                     name: "Settings",
-                    path: "/account/profile"
+                    path: "/account/Settings"
                 },
             ]
         },
@@ -43,24 +43,21 @@ export let menu = [
                 },
                 {
                     name: "Database",
-                    path: "/Database"
+                    path: "/Food/Database"
                 },
                 {
                     name: "My Foods",
-                    path: "/MyFoods"
+                    path: "/Food/MyFoods"
                 },
                 {
                     name: "My Meals",
-                    path: "/MyMeals"
+                    path: "/Food/MyMeals"
                 },
                 {
                     name: "Recipes",
-                    path: "/Recipes"
+                    path: "/Food/Recipes"
                 },
-                {
-                    name: "Settings",
-                    path: "/profile"
-                },
+                
             ]
         },
         {
@@ -73,16 +70,13 @@ export let menu = [
                 },
                 {
                     name: "Database",
-                    path: "/Goals"
+                    path: "/Exercice/Database"
                 },
                 {
-                    name: "My Exercice",
-                    path: "/chack-in"
+                    name: "My Exercices",
+                    path: "/Exercice/MyExercices"
                 },
-                {
-                    name: "Settings",
-                    path: "/Settings"
-                },
+                
             ]
         },
         {
@@ -93,30 +87,7 @@ export let menu = [
                     name: "Community",
                     path: "/"
                 },
-                {
-                    name: "Goals",
-                    path: "/Goals"
-                },
-                {
-                    name: "Check-In",
-                    path: "/Chack-In"
-                },
-                {
-                    name: "Mail",
-                    path: "/Mail"
-                },
-                {
-                    name: "Profile",
-                    path: "/Profile"
-                },
-                {
-                    name: "Friends",
-                    path: "/Friends"
-                },
-                {
-                    name: "Settings",
-                    path: "/Settings"
-                },
+               
             ]
         }
     ]

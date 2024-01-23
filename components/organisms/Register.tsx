@@ -7,6 +7,7 @@ import signUpWithEmail from "@/lib/signUpWithEmail";
 import { toast } from "react-toastify";
 import { signInUser } from "@/lib/signIn";
 import React from "react";
+import Link from "next/link";
 const Register = () => {
 
     const handleGoogleSignIn = () => {
@@ -26,7 +27,7 @@ const Register = () => {
 
 
         if (form_values.password != form_values.Confirm_Password) {
-            toast.error("password do not match");
+            toast.error("passwords do not match");
         } else {
             signUpWithEmail(
                 form_values.email.toString(),
@@ -90,6 +91,12 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <p className="sm:m-4 sm:mb-1 mb-72 mt-4">
+                Already have an account?
+                <Link href="login" className="text-blue-500">
+                    Log In now
+                </Link>
+            </p>
         </div>
     );
 };

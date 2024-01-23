@@ -28,6 +28,7 @@ export const CheckUser = async ()=>{
             return getUser;
         }
         }
+        //else redirect to login page
 
   }
     

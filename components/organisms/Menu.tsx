@@ -33,8 +33,8 @@ const Menu = () => {
         <div className="w-full md:h-28 bg-blue-800 hidden md:block ">
             <div className="h-[50%] bg-[#0066EE] w-full">
                 <div className="md:max-w-[992px] md:m-auto md:flex md:items-center h-[100%]">
-                    {menu.map((item) => (
-                        item.path === pathname ?
+                    {menu.map((item, index) => (
+                        (pathname.includes(item.path) && index != 0) || (pathname === "/" && index === 0) || (pathname.includes('account') && index === 0) ?
                             <div key={item.path} className="flex items-center h-[100%] px-6 text-white font-bold cursor-pointer text-xs bg-[#00548b]">{item.main.toUpperCase()}</div>
                             : <div key={item.path} onClick={() => router.push(item.path)} className=" flex items-center h-[100%] px-6 text-white font-bold cursor-pointer text-xs ">{item.main.toUpperCase()}</div>
                     ))}
@@ -42,10 +42,15 @@ const Menu = () => {
             </div>
             <div className="h-[50%] bg-[#00548b]">
                 <div className="md:max-w-[992px] md:m-auto md:flex md:items-center h-[100%]">
-                    {menu.map((item) => (
-                        <div key={item.path} className="w-full h-[100%] flex" >
-                            <div key={Math.random()} onClick={() => { router.push("") }} className="p-4 text-white font-bold cursor-pointer text-sm bg-[#00548b] h-full" >itest</div>
-                        </div>
+
+                    {menu.map((item, index) => (
+                        (pathname.includes(item.path) && index != 0) || (pathname === "/" && index === 0) || (pathname.includes('account') && index === 0) ?
+                            item.subMenu.map((val, index) => (
+                                <div key={Math.random()} className="h-[100%] flex" >
+                                    <div key={Math.random()} onClick={() => { router.push(val.path) }} className="p-4 text-white font-bold cursor-pointer text-sm bg-[#00548b] h-full" >{val.name}</div>
+                                </div>
+                            ))
+                            : null
                     ))}
                 </div>
             </div>

@@ -9,20 +9,20 @@ const LandingPage = () => {
     return <div className="bg-[url('/landing-bg.svg')] bg-cover  bg-no-repeat lg:h-[100vh] lg:w-screen">
         <div className="max-w-[992px] mr-auto ml-auto h-[100%]">
             <div className="flex justify-between py-2 px-3 lg:px-0">
-                <div className="text-3xl text-white ">
-                    fitnessPal
+                <div className="text-3xl font-bold text-white ">
+                    FitnessPal
                 </div>
                 <FaUserCircle className="text-3xl z-20 text-white cursor-pointer" onClick={() => router.push("/login")} />
             </div>
-            <div className="flex flex-col gap-4 lg:w-[50%] lg:py-[13rem] h-[70%] justify-center items-center lg:block">
-                <div className="z-20 flex flex-col gap-3 px-4">
-                    <h1 className="text-5xl text-white font-bold text-center lg:text-left leading-snug">Reach your goals <span className="font-thin">with FitnessPal</span></h1>
-                    <h2 className="text-5xl text-white text-center lg:text-left"></h2>
-                    <p className="text-white text-sm text-center mt-3 lg:mt-2  lg:text-left ">Build healthy habits with the all-in-one food, exercise, and calorie tracker.</p>
+            <div className="flex flex-col gap-4 lg:w-[50%] lg:py-[13rem] h-[70%] justify-center items-center lg:block ">
+                <div className="flex flex-col gap-3 px-4 py-3">
+                    <h1 className="text-5xl z-20 text-white font-bold text-center lg:text-left leading-snug">Reach your goals <span className="font-thin">with FitnessPal</span></h1>
+                    <h2 className="text-5xl z-20 text-white text-center lg:text-left"></h2>
+                    <p className="text-white z-20 text-sm text-center mt-3 lg:mt-2  lg:text-left ">Build healthy habits with the all-in-one food, exercise, and calorie tracker.</p>
                 </div>
-                <div className="lg:w-[100%] ml-4 mt-7">
-                    <button className="bg-white rounded-3xl px-14 py-3 text-blue-600 relative cursor-pointer w-auto" onClick={() => router.push("/register")}>
-                        <p className="font-bold cursor-pointer">START TODAY</p>  <IoIosArrowForward className="cursor-pointer absolute top-[32.2%] right-4 font-bold" />
+                <div className="lg:w-[100%]  ml-4 mt-7 ">
+                    <button className="bg-white rounded-3xl px-14 py-3 relative z-20  text-blue-600  cursor-pointer w-auto h-auto" onClick={() => router.push("/register")}>
+                        <p className="font-bold">START TODAY</p>  <IoIosArrowForward className=" absolute top-[32.2%] right-4 font-bold" />
                     </button>
                 </div>
                 <div className="lg:hidden flex justify-center items-center mt-6">

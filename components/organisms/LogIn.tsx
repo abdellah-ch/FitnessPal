@@ -85,7 +85,7 @@ const LogIn = () => {
                     </div>
                 </div>
             </div >
-            <p className="sm:m-4 sm:mb-1 mb-72">
+            <p className="sm:m-4 sm:mb-1 mb-72 mt-4">
                 Not A member yet?
                 <Link href="register" className="text-blue-500">
                     Sign up now

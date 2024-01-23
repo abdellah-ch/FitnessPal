@@ -46,7 +46,7 @@ export default function Header() {
             </div>
             {user ?
                 <div className="flex">
-                    <p className="md:border-r-2 pr-1.5  md:block hidden"> hi, {user?.displayName} </p>
+                    <p className="md:border-r-2 pr-1.5  md:block hidden"> hi, {user?.displayName || "user"} </p>
                     <Link href="/" className="md:pl-1.5 text-blue-500 md:block hidden" onClick={handelSumit}>LogOut</Link>
                 </div>
                 : <div className="text-blue-500 flex">
