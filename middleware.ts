@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest, ) {
 
      
   //fetch
-  const res = await fetch("http://localhost:3000/api/checkUser", {
+  const res = await fetch("/api/checkUser", {
         method: "POST",
         body: JSON.stringify({token:session}),
       })
