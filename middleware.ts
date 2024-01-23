@@ -31,5 +31,5 @@ export async function middleware(request: NextRequest, ) {
 
 //Add your protected routes
 export const config = {
-  matcher: [ '/account/:path*'],
+    matcher: ['/account/:path*', '/Exercice/:path*' ,'/Food/:path*','/Community/:path*' ],
 };
