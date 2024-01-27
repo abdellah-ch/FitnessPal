@@ -6,21 +6,41 @@ import { FcGoogle } from "react-icons/fc";
 import signUpWithEmail from "@/lib/signUpWithEmail";
 import { toast } from "react-toastify";
 import { signInUser } from "@/lib/signIn";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "@/lib/firebase-config";
+
 const Register = () => {
+    const [active, setActive] = useState<boolean>(false)
+    const router = useRouter()
+    const handleGoogleSignIn = (e: any) => {
+        e.preventDefault()
+        setActive(!active)
+        signInWithPopup(auth, provider).then((res) => {
+            //loading false
+            res.user.getIdToken().then((res) => {
+                fetch("/api/auth", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${res}`,
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                }).then(() => {
+                    router.push("/account")
+                })
 
-    const handleGoogleSignIn = () => {
-        //signInWithRedirect(auth, provider);
-
-        signInUser().then(() => {
-            //router.refresh();
-            //router.push("/")
+            })
+        }).catch((err) => {
+            toast.error("pls try again")
         });
     };
 
     const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setActive(!active)
         var formData = new FormData(e.currentTarget);
         const form_values: { [key: string]: FormDataEntryValue } = Object.fromEntries(formData);
         console.log(form_values);
@@ -34,9 +54,7 @@ const Register = () => {
                 form_values.password.toString()
             )
                 .then(() => {
-                    console.log(form_values.name.toString());
-                    console.log(form_values.text.toString());
-
+                    router.push("/account")
                 })
                 .catch(() => {
                     toast.error(" pls check your info and try again");
@@ -70,6 +88,7 @@ const Register = () => {
                                                 <Button
                                                     type="submit"
                                                     className="bg-blue-600 font-bold text-lg hover:bg-blue-700 w-full h-14 py-3 rounded-sm mt-5 mb-2"
+                                                    disabled={active}
                                                 >
                                                     Register
                                                 </Button>
@@ -77,7 +96,8 @@ const Register = () => {
                                                 <Button
                                                     type="button"
                                                     className="bg-[#EBEBF0] text-black text-lg font-bold w-full h-14 py-3 rounded-sm mt-2 hover:shadow-lg hover:bg-[#EBEBF0] relative"
-                                                    onClick={() => handleGoogleSignIn()}
+                                                    onClick={handleGoogleSignIn}
+                                                    disabled={active}
                                                 >
                                                     <FcGoogle className="absolute left-3 text-2xl" />
                                                     continue with google

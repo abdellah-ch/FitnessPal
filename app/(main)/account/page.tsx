@@ -1,9 +1,19 @@
-import React from 'react'
+import InitialComponent from "@/components/organisms/initialComponent"
+import { checkProfileprisma } from "@/lib/checkProfileprisma"
+import { redirect } from "next/navigation"
 
-function page() {
-    return (
-        <div>page</div>
-    )
+const page = async () => {
+
+    let profile = await checkProfileprisma()
+
+    if (!profile) {
+        redirect("/account/setup")
+    } else {
+        return (
+            <InitialComponent />
+        )
+    }
+
 }
 
 export default page

@@ -1,21 +1,22 @@
-"use client"
-import Footer from "@/components/molucules/Footer";
 import Header from "@/components/molucules/Header";
-import LoadingComponent from "@/components/organisms/LoadingComponent";
-import { useAuth } from "@/providers/AuthProvider";
-import { useRouter } from "next/navigation";
+import { CheckUser } from "@/lib/checkUser";
+import currentUserPrisma from "@/lib/currentUserprisma";
+import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-    const router = useRouter()
-    let AuthState = useAuth()
-    if (AuthState.isLoading) return <LoadingComponent />
-    if (AuthState.isLogged) {
-        router.push("/");
+
+const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+    const user = await currentUserPrisma()
+
+    if (user != null) {
+
+        console.log(user);
+        redirect("/account")
     }
+
     return (
         <div className="flex flex-col h-full w-screen overflow-hidden">
-            <Header />
+            <Header user={user} />
             <ToastContainer />
             <main className="flex-1">{children}</main>
             {/*<Footer />*/}

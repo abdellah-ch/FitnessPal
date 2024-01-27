@@ -1,10 +1,11 @@
-"use Client"
+"use client"
 import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
 import phonelarge from "@/public/hero-phone-large.webp"
 import { IoIosArrowForward } from "react-icons/io";
 const LandingPage = () => {
+
     const router = useRouter()
     return <div className="bg-[url('/landing-bg.svg')] bg-cover  bg-no-repeat lg:h-[100vh] lg:w-screen">
         <div className="max-w-[992px] mr-auto ml-auto h-[100%]">

@@ -6,33 +6,100 @@ generator client {
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    userId    String   @unique
-    Username  String
-    imageUrl  String   @db.Text
-    email     String   @db.Text
+    id       Int    @id @default(autoincrement())
+    userId   String @unique
+    Username String
+    imageUrl String @db.Text
+    email    String @db.Text
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    profile Profile?
+    profile   Profile?
+    exercices ExercicesOnUsers[]
+    foods     FoodsOnUsers[]
 }
 
 model Profile {
-    id           String   @id @default(uuid())
-    bio          String   @db.Text
+    id           String @id @default(uuid())
+    bio          String @db.Text
     age          Int
     weight       Int
+    weightUnit   String @default("lbs")
     height       Int
-    fitness_goal String   @db.Text
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
+    heightUnit   String @default("ft")
+    fitness_goal String @db.Text
 
-    userId Int  @unique
-    user   User @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [userId])
+}
+
+model Exercices {
+    id       String @id @default(uuid())
+    name     String
+    duration Int
+    calories Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    users ExercicesOnUsers[]
+}
+
+enum mealType {
+    breakfast
+    lunch
+    dinner
+    snacks
+}
+
+model Foods {
+    id       String   @id @default(uuid())
+    quantity Int
+    mealtype mealType
+    calories Int
+    carbs    Int
+    fat      Int
+    protein  Int
+    sodium   Int
+    sugar    Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    users FoodsOnUsers[]
+}
+
+model ExercicesOnUsers {
+    user   User   @relation(fields: [userId], references: [userId])
+    userId String
+
+    exercice   Exercices @relation(fields: [exerciceId], references: [id])
+    exerciceId String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([exerciceId, userId])
+}
+
+model FoodsOnUsers {
+    user   User   @relation(fields: [userId], references: [userId])
+    userId String
+
+    food   Foods  @relation(fields: [foodId], references: [id])
+    foodId String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([foodId, userId])
 }

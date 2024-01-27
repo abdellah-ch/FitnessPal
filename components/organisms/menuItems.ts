@@ -1,11 +1,11 @@
 export let menu = [
         {
             main: "My Home",
-            path: "/",
+            path: "/account",
             subMenu: [
                 {
                     name: "Home",
-                    path: "/"
+                    path: "/account"
                 },
                 {
                     name: "Goals",
@@ -85,7 +85,7 @@ export let menu = [
             subMenu: [
                 {
                     name: "Community",
-                    path: "/"
+                    path: "/Community"
                 },
                
             ]

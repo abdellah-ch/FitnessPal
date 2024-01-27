@@ -1,5 +1,4 @@
 import { auth } from "@/lib/firebase-admin-config";
-import { NextRequest, NextResponse } from "next/server";
 //try to change the logic return first 
 export async function POST(request: Request, response: Response) {
 

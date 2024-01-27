@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useState, useEffect } from "react"
 
 type AuthType = {
-    isLogged: boolean,
+    isLogged: boolean | null,
     isLoading: boolean
 }
 
@@ -21,7 +21,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isLogged, setIsLogged] = useState<boolean>(false)
+    const [isLogged, setIsLogged] = useState<boolean | null>(null)
     useEffect(() => {
         setIsLoading(true);
         onAuthStateChanged(auth, (user) => {

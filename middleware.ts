@@ -10,10 +10,9 @@ export async function middleware(request: NextRequest, ) {
   if (!session) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-
      
   //fetch
-    let url = "" 
+    let url:string 
   if(process.env.NEXT_PUBLIC_ENV != "dev"){
     url = "https://fitnesspal-ruddy.vercel.app/api/checkUser"
   }else{

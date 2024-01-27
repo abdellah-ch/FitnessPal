@@ -3,20 +3,37 @@ import signInEmail from "@/lib/signInWithEmail";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-import { signInUser } from "@/lib/signIn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase-config";
 import Input from "../atoms/Input";
 import Input_Pass from "../atoms/Input_Pass";
 import { Button } from "../atoms/button";
-import { useAuth } from "@/providers/AuthProvider";
+import { auth, provider } from "@/lib/firebase-config";
+import { signInWithPopup } from "firebase/auth";
+
 const LogIn = () => {
+    const [active, setActive] = useState<boolean>(false)
     const router = useRouter()
-    const state = useAuth()
-    const handleGoogleSignIn = () => {
-        signInUser().then(() => {
+
+    const handleGoogleSignIn = async (e: any) => {
+        //make loading true
+        e.preventDefault()
+        setActive(!active)
+        signInWithPopup(auth, provider).then((res) => {
+            //loading false
+            res.user.getIdToken().then((res) => {
+                fetch("/api/auth", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${res}`,
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                }).then(() => {
+                    router.push("/account")
+                })
+
+            })
         }).catch((err) => {
             toast.error("pls try again")
         });
@@ -24,12 +41,14 @@ const LogIn = () => {
 
     const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setActive(!active)
         var formData = new FormData(e.currentTarget);
         const form_values: { [key: string]: FormDataEntryValue } =
             Object.fromEntries(formData);
 
         signInEmail(form_values.email.toString(), form_values.password.toString())
             .then(() => {
+                router.push("/account")
             })
             .catch(() => {
                 toast.error("incorrect email or password");
@@ -37,7 +56,6 @@ const LogIn = () => {
 
         //console.log("form values", form_values);;
     };
-
     return (
         <div className="h-full flex  items-center flex-col">
             <div className="flex justify-center items-center sm:shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-xl sm:h-[510px] sm:w-[500px] w-full h-full mt-[48px]">
@@ -64,14 +82,16 @@ const LogIn = () => {
                                                 <Button
                                                     type="submit"
                                                     className="bg-blue-600 font-bold text-lg hover:bg-blue-700 w-full h-14 py-3 rounded-sm mt-5 mb-2"
+                                                    disabled={active}
                                                 >
                                                     Log In
                                                 </Button>
                                                 <p className="w-full text-center h-[24px]">or</p>
                                                 <Button
-                                                    type="button"
+                                                    type="submit"
                                                     className="bg-[#EBEBF0] text-black text-lg font-bold w-full h-14 py-3 rounded-sm mt-2 hover:shadow-lg hover:bg-[#EBEBF0] relative"
-                                                    onClick={() => handleGoogleSignIn()}
+                                                    onClick={handleGoogleSignIn}
+                                                    disabled={active}
                                                 >
                                                     <FcGoogle className="absolute left-3 text-2xl" />
                                                     continue with google
