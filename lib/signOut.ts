@@ -7,7 +7,7 @@ export async function signOutUser() {
     await signOut(auth);
 
     //Clear the cookies in the server
-    await fetch("http://localhost:3000/api/signOut", {
+    await fetch("/api/signOut", {
       method: "POST",
     });
 
