@@ -43,8 +43,7 @@ const Register = () => {
         setActive(!active)
         var formData = new FormData(e.currentTarget);
         const form_values: { [key: string]: FormDataEntryValue } = Object.fromEntries(formData);
-        console.log(form_values);
-
+        //console.log(form_values);
 
         if (form_values.password != form_values.Confirm_Password) {
             toast.error("passwords do not match");

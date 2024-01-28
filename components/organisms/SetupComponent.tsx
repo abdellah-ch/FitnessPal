@@ -1,10 +1,36 @@
 "use client"
-import { useState } from "react"
+import { HtmlHTMLAttributes, useState } from "react"
 import { UnitsModal } from "../molucules/UnitsModal"
+import { CheckUser } from "@/lib/checkUser"
+import { db } from "@/lib/prisma"
 
-const SetupComponent = () => {
+interface propsType {
+    user: {
+        userId: string;
+        Username: string;
+        imageUrl: string;
+        email: string;
+        createdAt: Date;
+        updatedAt: Date;
+    } | undefined
+
+}
+
+const SetupComponent = (props: propsType) => {
+
     //handelSubmit
-    const handelSubmit = () => {
+    const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        var formData = new FormData(e.currentTarget)
+        ///
+        let form_values = Object.fromEntries(formData)
+        console.log(form_values);
+
+        let userId = props.user?.userId
+
+        //TODO : add the profile create a function to handle create profile then redirect to "/account" calculte the daily calories
+        //and store in the db  
+
 
     }
     //units
@@ -33,7 +59,7 @@ const SetupComponent = () => {
     }
 
     return (
-        <div className="max-w-[992px] mr-auto ml-auto mt-4 z-20">
+        <div className="max-w-[992px] mr-auto ml-auto mt-4 z-20 p-2">
             {isOpen ? <UnitsModal isOpen={isOpen} setIsOpen={setIsopen} modelSubmit={modelSubmit} /> : null}
             <div className=" flex flex-col gap-3">
                 <h1 className="py-8 text-2xl font-bold">Setup your diet profile</h1>
@@ -48,10 +74,10 @@ const SetupComponent = () => {
                     {/* first row  */}
                     <div className="flex flex-row items-center gap-5">
                         <div className="relative flex flex-row w-[150px] p-4 border-[1px] border-gray-700 rounded-lg">
-                            <input type="text" className=" w-[100%] outline-none " placeholder="weight" />
+                            <input type="text" className=" w-[100%] outline-none " placeholder="weight" name="weight" />
                             <p className="absolute right-2 ">{weightUnit}</p>
                         </div>
-                        <div><p>On</p></div>
+                        <div>On</div>
                         <div className=" w-[150px] p-4 border-[1px] border-gray-700 rounded-lg cursor-pointer">
                             <input type="date" className=" w-[100%] outline-none" />
                         </div>
@@ -59,13 +85,13 @@ const SetupComponent = () => {
                     {/* first row  */}
                     {/*second row */}
                     <div className="relative flex flex-row w-[150px] p-4 border-[1px] border-gray-700 rounded-lg">
-                        <input type="text" className=" w-[100%] outline-none" placeholder="height" />
+                        <input type="text" className=" w-[100%] outline-none" placeholder="height" name="height" />
                         <p className="absolute right-2 ">{heightUnit}</p>
                     </div>
                     {/*second row */}
                     {/*3 row */}
                     <div className="relative flex flex-row w-[150px] p-4 border-[1px] border-gray-700 rounded-lg">
-                        <input type="text" className=" w-[100%] outline-none" placeholder="Goal weight" />
+                        <input type="text" className=" w-[100%] outline-none" placeholder="Goal weight" name="GoalWeight" />
                         <p className="absolute right-2 ">{weightUnit}</p>
                     </div>
                     {/*3 row */}
@@ -79,7 +105,7 @@ const SetupComponent = () => {
                     </div>
                     {/*5 */}
                     <div className=" w-[250px] p-4 border-[1px] border-gray-700 rounded-lg cursor-pointer">
-                        <input type="date" className=" w-[100%] outline-none" />
+                        <input type="date" className=" w-[100%] outline-none" name="birthDate" />
                     </div>
                     {/*6*/}
                     <div>

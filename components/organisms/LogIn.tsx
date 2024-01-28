@@ -10,7 +10,7 @@ import Input_Pass from "../atoms/Input_Pass";
 import { Button } from "../atoms/button";
 import { auth, provider } from "@/lib/firebase-config";
 import { signInWithPopup } from "firebase/auth";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
 const LogIn = () => {
     const [active, setActive] = useState<boolean>(false)
     const router = useRouter()
@@ -43,12 +43,26 @@ const LogIn = () => {
         e.preventDefault();
         setActive(!active)
         var formData = new FormData(e.currentTarget);
+        //get the form Object 
         const form_values: { [key: string]: FormDataEntryValue } =
             Object.fromEntries(formData);
 
-        signInEmail(form_values.email.toString(), form_values.password.toString())
-            .then(() => {
-                router.push("/account")
+        signInWithEmailAndPassword(auth, form_values.email.toString(), form_values.password.toString())
+            .then((res) => {
+                res.user.getIdToken().then((res) => {
+                    fetch("/api/auth", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${res}`,
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    }).then(() => {
+                        router.push("/account")
+                    }).catch((error) => {
+                        console.error(error)
+                    })
+                })
             })
             .catch(() => {
                 toast.error("incorrect email or password");

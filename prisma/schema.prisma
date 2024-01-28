@@ -11,8 +11,7 @@ datasource db {
 }
 
 model User {
-    id       Int    @id @default(autoincrement())
-    userId   String @unique
+    userId   String @id @unique
     Username String
     imageUrl String @db.Text
     email    String @db.Text
@@ -25,20 +24,33 @@ model User {
     foods     FoodsOnUsers[]
 }
 
+enum gender {
+    male
+    female
+}
+
+enum activetyType {
+    Sedentary
+    LightActivity
+    Active
+    VeryActive
+}
+
 model Profile {
-    id           String @id @default(uuid())
-    bio          String @db.Text
-    age          Int
-    weight       Int
-    weightUnit   String @default("lbs")
-    height       Int
-    heightUnit   String @default("ft")
-    fitness_goal String @db.Text
+    bio        String       @db.Text
+    weight     Int
+    weightUnit String       @default("lbs")
+    height     Int
+    heightUnit String       @default("ft")
+    weightGoal Int
+    age        Int
+    sex        gender
+    activety   activetyType
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    userId String @unique
+    userId String @id @unique
     user   User   @relation(fields: [userId], references: [userId])
 }
 

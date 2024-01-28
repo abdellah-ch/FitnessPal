@@ -39,7 +39,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         maxAge: expiresIn,
         httpOnly: true,
         secure: true,
-        SameSite:true
+        SameSite:"Lax"
       };
 
       //Add the cookie to the browser
