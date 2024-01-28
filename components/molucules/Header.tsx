@@ -19,7 +19,7 @@ export default function Header(props: any) {
     return (
         <div className="flex md:justify-between items-center max-w-[992px]  px-4  md:h-20 container bg-blue-700 h-14 md:bg-white md:py-4">
             <IoMdMenu className="text-white text-xl mr-2 md:hidden" />
-            <div className="font-bold md:text-blue-800 md:text-3xl text-white text-2xl cursor-pointer" onClick={() => { router.push("/account") }}>
+            <div className="font-bold md:text-blue-800 md:text-3xl text-white text-2xl cursor-pointer" onClick={() => { props.user ? router.push("/account") : router.push("/") }}>
                 FitnessPal
             </div>
             {props.user ?

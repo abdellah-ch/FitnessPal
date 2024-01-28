@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 interface ModelProps {
     isOpen: boolean;
     setIsOpen: (value: boolean) => void;
+    modelSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const UnitsModal = (props: ModelProps) => {
@@ -12,7 +13,7 @@ export const UnitsModal = (props: ModelProps) => {
             <div className="relative h-[500px] bg-white w-[320px]">
                 <IoMdClose className="absolute right-2 top-2 text-2xl cursor-pointer" onClick={() => { props.setIsOpen(false) }} />
                 <h1 className="text-lg font-bold py-5 px-3 mt-2">Change Units</h1>
-                <form className="px-3 ">
+                <form className="px-3 " onSubmit={props.modelSubmit}>
                     <div>
                         <p className="text-sm py-2">How would you like to measure weight?</p>
                         <div className="py-2">
@@ -28,11 +29,11 @@ export const UnitsModal = (props: ModelProps) => {
                     <div>
                         <p className="text-sm py-2">How would you like to measure weight?</p>
                         <div className="py-2">
-                            <input className="mr-3 w-5 h-5 p-2" type="radio" value="cm" name="unitW" id="Centimeters" />
+                            <input className="mr-3 w-5 h-5 p-2" type="radio" value="cm" name="unitH" id="Centimeters" />
                             <label className="text-lg" htmlFor="Centimeters">Centimeters</label>
                         </div>
                         <div className="py-2">
-                            <input className="mr-3 w-5 h-5 p-2" type="radio" value="ft" name="unitW" id="Feet" />
+                            <input className="mr-3 w-5 h-5 p-2" type="radio" value="ft" name="unitH" id="Feet" />
                             <label className="text-lg" htmlFor="Feet">Feet</label>
                         </div>
                     </div>
