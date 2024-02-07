@@ -3,6 +3,8 @@ import { HtmlHTMLAttributes, useState } from "react"
 import { UnitsModal } from "../molucules/UnitsModal"
 import { CheckUser } from "@/lib/checkUser"
 import { db } from "@/lib/prisma"
+import createProfile from "@/lib/createProfile"
+import { toast } from "react-toastify"
 
 interface propsType {
     user: {
@@ -28,9 +30,14 @@ const SetupComponent = (props: propsType) => {
 
         let userId = props.user?.userId
 
+        console.log(userId);
+
         //TODO : add the profile create a function to handle create profile then redirect to "/account" calculte the daily calories
         //and store in the db  
 
+        userId ? createProfile(userId, form_values, weightUnit, heightUnit).catch((e) => {
+            toast.error('error during insertion');
+        }) : null
 
     }
     //units
@@ -104,9 +111,13 @@ const SetupComponent = (props: propsType) => {
                         </div>
                     </div>
                     {/*5 */}
-                    <div className=" w-[250px] p-4 border-[1px] border-gray-700 rounded-lg cursor-pointer">
-                        <input type="date" className=" w-[100%] outline-none" name="birthDate" />
+                    <div>
+                        <p className="font-bold py-4">Birth date</p>
+                        <div className=" w-[250px] p-4 border-[1px] border-gray-700 rounded-lg cursor-pointer">
+                            <input type="date" className=" w-[100%] outline-none" name="birthDate" />
+                        </div>
                     </div>
+
                     {/*6*/}
                     <div>
                         <p className="font-bold p-4">How would you describe your normal daily activities?</p>

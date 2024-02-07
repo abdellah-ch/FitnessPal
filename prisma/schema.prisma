@@ -24,28 +24,16 @@ model User {
     foods     FoodsOnUsers[]
 }
 
-enum gender {
-    male
-    female
-}
-
-enum activetyType {
-    Sedentary
-    LightActivity
-    Active
-    VeryActive
-}
-
 model Profile {
-    bio        String       @db.Text
+    bio        String @db.Text
     weight     Int
-    weightUnit String       @default("lbs")
+    weightUnit String @default("lbs")
     height     Int
-    heightUnit String       @default("ft")
+    heightUnit String @default("ft")
     weightGoal Int
     age        Int
-    sex        gender
-    activety   activetyType
+    sex        String
+    activety   String
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
