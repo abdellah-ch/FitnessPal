@@ -5,7 +5,6 @@ import { Button } from "../atoms/button";
 import { FcGoogle } from "react-icons/fc";
 import signUpWithEmail from "@/lib/signUpWithEmail";
 import { toast } from "react-toastify";
-import { signInUser } from "@/lib/signIn";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

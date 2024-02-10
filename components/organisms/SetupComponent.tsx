@@ -1,20 +1,12 @@
 "use client"
 import { HtmlHTMLAttributes, useState } from "react"
 import { UnitsModal } from "../molucules/UnitsModal"
-import { CheckUser } from "@/lib/checkUser"
 import { db } from "@/lib/prisma"
 import createProfile from "@/lib/createProfile"
 import { toast } from "react-toastify"
 
 interface propsType {
-    user: {
-        userId: string;
-        Username: string;
-        imageUrl: string;
-        email: string;
-        createdAt: Date;
-        updatedAt: Date;
-    } | undefined
+    userId: string
 
 }
 
@@ -26,18 +18,18 @@ const SetupComponent = (props: propsType) => {
         var formData = new FormData(e.currentTarget)
         ///
         let form_values = Object.fromEntries(formData)
-        console.log(form_values);
+        // console.log(form_values);
 
-        let userId = props.user?.userId
+        let userId = props.userId
 
-        console.log(userId);
+        //console.log(userId);
 
         //TODO : add the profile create a function to handle create profile then redirect to "/account" calculte the daily calories
         //and store in the db  
 
-        userId ? createProfile(userId, form_values, weightUnit, heightUnit).catch((e) => {
+        createProfile(userId, form_values, weightUnit, heightUnit).catch((e) => {
             toast.error('error during insertion');
-        }) : null
+        })
 
     }
     //units
@@ -55,7 +47,7 @@ const SetupComponent = (props: propsType) => {
         var formData = new FormData(e.currentTarget)
         //chage the iterable "formData" to an object
         let formObject = Object.fromEntries(formData);
-        console.log(formObject.unitH);
+        //console.log(formObject.unitH);
         if (formObject.unitH) {
             setHeightUnit(formObject.unitH.toString())
         }

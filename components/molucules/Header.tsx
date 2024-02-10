@@ -2,17 +2,14 @@
 import React from "react";
 import { IoMdMenu } from "react-icons/io";
 import Link from "next/link";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase-config";
 import { signOutUser } from "@/lib/signOut";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
-import { CheckUser } from "@/lib/checkUser";
 
 export default function Header(props: any) {
     const router = useRouter()
     const handelSumit = () => {
         signOutUser().then(() => {
+            window.location.reload()
             router.push("/")
         });
     };

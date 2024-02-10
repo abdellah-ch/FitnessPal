@@ -1,11 +1,24 @@
+"use client"
 import Image from "next/image";
 import user from "@/public/user.png"
 import { FaNotesMedical } from "react-icons/fa";
 import Link from "next/link";
-//import { usePathname } from "next/navigation";
+import { currentUserIdClient } from "@/lib/currentUserIdclient";
+
+//import { useCookies } from 'next-client-cookies';
+//install it 
 const DailyBox = () => {
-    //const paht = usePathname()
-    //console.log(paht)
+    currentUserIdClient().then((res) => {
+        console.log(res);
+    });
+
+    /* 
+        get the cookie in client side 
+
+
+        const cookies = useCookies();
+        <p>My cookie value: {cookies.get('my-cookie')}</p>
+     */
     return (
         <div className="flex flex-col md:w-[100%]  w-[90%] m-auto md:m-0">
             <div className="flex flex-wrap bg-[#0a5282] px-2 text-white items-center justify-between  h-[36px]">

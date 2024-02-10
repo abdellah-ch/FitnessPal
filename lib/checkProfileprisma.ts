@@ -1,12 +1,13 @@
+"use server"
+import { currentUserIdServer } from "./CurrentUserIdserver";
 import { db } from "./prisma";
-import currentUserPrisma from "./currentUserprisma";
-export const checkProfileprisma =async () => {
+export const checkProfileprisma = async () => {
+    const userId = await currentUserIdServer()
     try {
-     const user = await currentUserPrisma()
 
     const profile = await db.profile.findUnique({
         where: {
-            userId: user.user_id,
+            userId: userId,
         },
     });
     

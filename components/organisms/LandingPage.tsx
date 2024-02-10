@@ -15,7 +15,7 @@ const LandingPage = () => {
                 </div>
                 <FaUserCircle className="text-3xl z-20 text-white cursor-pointer" onClick={() => router.push("/login")} />
             </div>
-            <div className="flex flex-col gap-4 lg:w-[50%] lg:py-[13rem] h-[70%] justify-center items-center lg:block ">
+            <div className="flex flex-col gap-4 lg:w-[50%]   lg:h-[80vh] justify-center items-center  ">
                 <div className="flex flex-col gap-3 px-4 py-3">
                     <h1 className="text-5xl z-20 text-white font-bold text-center lg:text-left leading-snug">Reach your goals <span className="font-thin">with FitnessPal</span></h1>
                     <h2 className="text-5xl z-20 text-white text-center lg:text-left"></h2>

@@ -1,22 +1,30 @@
 import { auth } from "@/lib/firebase-admin-config";
-//try to change the logic return first 
-export async function POST(request: Request, response: Response) {
 
-    const session = await request.json()
+import { NextRequest, NextResponse } from "next/server";
 
-    if (!session.token) {
-    return Response.json({ isLogged: "alo" }, { status: 200 });
+import { cookies } from "next/headers";
+
+export async function GET(request:NextRequest) {
+   
+    const cookieStore = cookies()    
+
+    const token = cookieStore.get('session')
+   
+
+    if(token && token.value != "undefined"){
+
+        const decodedClaims = await  auth.verifySessionCookie(token.value, false)
+        
+        if (!decodedClaims) {
+
+            return Response.json( { status: 401 });
+
+        }
+
+        return Response.json({decodedClaims,status:200})
     }
-
-const decodedClaims = await auth.verifySessionCookie(session.token, true)
-   //console.log(decodedClaims);
-    /*.catch(()=>{
-    return Response.json({ isLogged: false }, { status: 200 });
-    })*/
-
-  if (!decodedClaims) {
-    return Response.json({ isLogged: "alo"}, { status: 200 });
-  }
+    
+   return Response.json( { status: 401 });
+    
   
-    return Response.json({ isLogged: "true" ,decodedClaims},{status:200})
 }

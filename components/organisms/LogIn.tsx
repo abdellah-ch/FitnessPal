@@ -1,5 +1,4 @@
 "use client";
-import signInEmail from "@/lib/signInWithEmail";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";

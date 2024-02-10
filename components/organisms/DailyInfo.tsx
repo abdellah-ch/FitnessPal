@@ -2,6 +2,7 @@
 import DailyBox from "../molucules/DailyBox"
 
 export const DailyInfo = () => {
+
     return (
         <div className="max-w-[992px] mr-auto ml-auto">
             <div className="flex gap-3">
