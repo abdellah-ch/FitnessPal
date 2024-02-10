@@ -1,6 +1,5 @@
 import Header from "@/components/molucules/Header";
 import Menu from "@/components/organisms/Menu";
-import currentUserPrisma from "@/lib/currentUserprisma";
 import { cookies } from "next/headers";
 import { ToastContainer } from "react-toastify";
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
