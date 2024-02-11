@@ -1,6 +1,5 @@
-import { cookies } from "next/headers"
 
-export const currentUserIdClient = async (server?:boolean) => {
+export const currentUserIdClient = async () => {
      let url:string 
 
         if(process.env.NEXT_PUBLIC_ENV != "dev"){
@@ -13,7 +12,6 @@ export const currentUserIdClient = async (server?:boolean) => {
 
         }
 
-    if(!server){
     const res = await  fetch(url, {
         credentials: 'include',
         method: "get",
@@ -23,5 +21,4 @@ export const currentUserIdClient = async (server?:boolean) => {
     console.log(data);
     
     return data.decodedClaims.uid
-    }
    }
