@@ -1,25 +1,9 @@
 import Header from "@/components/molucules/Header";
 import { checkUserFirebase } from "@/lib/checkUserFirebase";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
-
-
-    const cookieStore = cookies()
-
-    const token = cookieStore.get('session')
-
-    const res = await fetch("http://localhost:3000/api/checkUser", {
-
-        credentials: 'include',
-        method: "get",
-        headers: {
-            Cookie: `session=${token?.value}`
-        }
-
-    })
 
     const data = await checkUserFirebase()
 
