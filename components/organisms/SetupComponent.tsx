@@ -1,9 +1,10 @@
 "use client"
-import { HtmlHTMLAttributes, useState } from "react"
+import { useState } from "react"
 import { UnitsModal } from "../molucules/UnitsModal"
-import { db } from "@/lib/prisma"
 import createProfile from "@/lib/createProfile"
 import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
+import { DailyCalorieGoal } from "@/lib/DailyCalorieGoal"
 
 interface propsType {
     userId: string
@@ -11,25 +12,29 @@ interface propsType {
 }
 
 const SetupComponent = (props: propsType) => {
+    const router = useRouter()
 
     //handelSubmit
     const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         var formData = new FormData(e.currentTarget)
-        ///
+
         let form_values = Object.fromEntries(formData)
-        // console.log(form_values);
 
         let userId = props.userId
 
-        //console.log(userId);
+        createProfile(userId, form_values, weightUnit, heightUnit)
+            .then(() => {
+                //create the daily  
+                DailyCalorieGoal(props.userId).then((res) => {
+                    window.location.reload()
+                    router.push("/account")
+                })
+            })
 
-        //TODO : add the profile create a function to handle create profile then redirect to "/account" calculte the daily calories
-        //and store in the db  
-
-        createProfile(userId, form_values, weightUnit, heightUnit).catch((e) => {
-            toast.error('error during insertion');
-        })
+            .catch((e) => {
+                toast.error('error during insertion');
+            })
 
     }
     //units

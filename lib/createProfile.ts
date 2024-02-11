@@ -1,14 +1,11 @@
 "use server"
-import { redirect } from "next/navigation";
 import { db } from "./prisma";
-
 
 const ageCalculation = (birthdate:string)=>{
     const birthYear = Number(birthdate.substring(0,4));    
 
     const d = new Date();
     let year = d.getFullYear();
-
 
     let age = year - birthYear;
 
@@ -33,9 +30,6 @@ const createProfile = async (userId:string,formValues: {[k: string]: FormDataEnt
     userId:userId 
     },
   });
-
-    
- redirect("/account")
 
 }
 
