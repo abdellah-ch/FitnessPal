@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
 
-export const currentUserIdClient = async (server?:boolean) => {
+export const checkUserFirebase =async () => {
      let url:string 
 
         if(process.env.NEXT_PUBLIC_ENV != "dev"){
@@ -13,15 +13,21 @@ export const currentUserIdClient = async (server?:boolean) => {
 
         }
 
-    if(!server){
-    const res = await  fetch(url, {
+    const cookieStore = cookies()
+
+    const token = cookieStore.get('session')
+   
+    const res = await fetch(url, {
+
         credentials: 'include',
         method: "get",
+        headers: {
+            Cookie: `session=${token?.value}`
+        }
+
     })
-    
-    const data = await res.json()
-    console.log(data);
-    
-    return data.decodedClaims.uid
-    }
-   }
+
+    const data = await res.json()   
+   
+    return data;
+}

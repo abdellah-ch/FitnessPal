@@ -1,6 +1,7 @@
 "use server"
 import InitialComponent from "@/components/organisms/initialComponent"
 import { checkProfileprisma } from "@/lib/checkProfileprisma"
+import { createUserPrisma } from "@/lib/createUserPrisma"
 import { redirect } from "next/navigation"
 /*
 interface profileType {
@@ -45,7 +46,8 @@ export const dailyCaloriesCalc = async (profile: profileType) => {
 */
 
 const page = async () => {
-
+    //check the user if there is no user create one
+    await createUserPrisma()
     const profile = await checkProfileprisma()
     if (!profile) {
         redirect("/account/setup")

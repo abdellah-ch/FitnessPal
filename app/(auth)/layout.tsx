@@ -1,4 +1,5 @@
 import Header from "@/components/molucules/Header";
+import { checkUserFirebase } from "@/lib/checkUserFirebase";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +21,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 
     })
 
-    const data = await res.json()
+    const data = await checkUserFirebase()
 
     if (data.status === 401) {
         return (
