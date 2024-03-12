@@ -2,7 +2,6 @@
 import { db } from "./prisma"
 import axios from "axios"
 
-
 export const DailyCalorieGoal = async (userId: string) => {
     //get user profile
     const profile = await db.profile.findUnique({

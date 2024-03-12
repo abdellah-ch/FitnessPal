@@ -1,4 +1,6 @@
+"use Client"
 import { cn } from "@/lib/utils";
+
 import React, { useState } from "react";
 
 type ChildProps = {

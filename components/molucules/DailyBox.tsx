@@ -1,18 +1,26 @@
 "use client"
+import {useState,useEffect} from "react";
 import Image from "next/image";
 import user from "@/public/user.png"
 import { FaNotesMedical } from "react-icons/fa";
 import Link from "next/link";
 import { currentUserIdClient } from "@/lib/currentUserIdclient";
-
+import {GetCalorieGoal} from "@/lib/GetCalorieGoal"; 
 //import { useCookies } from 'next-client-cookies';
 //install it 
 const DailyBox = () => {
-    currentUserIdClient().then((res) => {
-        console.log(res);
-    });
 
-    /* 
+    const [Daily,SetDaily] = useState<string>("");
+    
+    useEffect(()=>{
+      currentUserIdClient().then((res) => {
+        //res is the userId
+        GetCalorieGoal(res).then(res =>  SetDaily(res.toString()))
+        //make a request to get the goal calorie
+        //get todays food calories
+      });
+    },[])
+        /* 
         get the cookie in client side 
 
 
@@ -47,7 +55,7 @@ const DailyBox = () => {
                     <div className="w-full ">
                         <p className="text-xs mb-2">Calories Remaining <Link href="" className="text-sm text-blue-600">Change</Link></p>
                         <div className="flex flex-col gap-2 lg:flex-row p-3">
-                            <span className="text-5xl font-bold text-green-500 md:w-[30%]">2590</span>
+                            <span className="text-5xl font-bold text-green-500 md:w-[30%]">{Daily}</span>
                             <div className="flex flex-col gap-2 lg:flex-row lg:w-[70%] ">
                                 <button className=" border-1 text-[#666666] bg-white border-[#D2D2D2] hover:bg-[#B2B2B2] rounded-md px-[20px]  w-[80%] py-1 md:w-[70%]">Add Exercice</button>
                                 <button className=" border-1 text-[#666666] bg-white border-[#D2D2D2] hover:bg-[#B2B2B2] rounded-md px-[20px] w-[80%] py-1 md:w-[70%]">Add Food</button>
@@ -57,7 +65,7 @@ const DailyBox = () => {
                         <div className=" border-t-2 py-3 w-[95%] hidden md:block m-auto  ">
                             <div className="flex flex-row justify-around ">
                                 <div className="border-r-2 pr-5">
-                                    <p>2590</p>
+                                    <p>{Daily}</p>
                                     <p>Goal</p>
                                 </div>
                                 <div>
