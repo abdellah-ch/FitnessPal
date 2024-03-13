@@ -9,6 +9,6 @@ export const GetCalorieGoal = async (userId:String) =>{
           userId:userId
         },
     });
-return res?.daily;
+return res?.daily || "";
 }
     
