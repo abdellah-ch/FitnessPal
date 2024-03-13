@@ -21,8 +21,8 @@ model User {
 
     daily     DailyCalGoal?
     profile   Profile?
-    exercices ExercicesOnUsers[]
-    foods     FoodsOnUsers[]
+    exercices Exercices?
+    foods     Foods?
 }
 
 model DailyCalGoal {
@@ -51,15 +51,15 @@ model Profile {
 }
 
 model Exercices {
-    id       String @id @default(uuid())
+    userId       String @id @default(uuid())
     name     String
     duration Int
     calories Int
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    users ExercicesOnUsers[]
+    
+    user   User   @relation(fields: [userId], references: [userId])
 }
 
 enum mealType {
@@ -70,7 +70,7 @@ enum mealType {
 }
 
 model Foods {
-    id       String   @id @default(uuid())
+    userId       String   @id @default(uuid())
     quantity Int
     mealtype mealType
     calories Int
@@ -82,32 +82,8 @@ model Foods {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    users FoodsOnUsers[]
-}
-
-model ExercicesOnUsers {
+    
     user   User   @relation(fields: [userId], references: [userId])
-    userId String
-
-    exercice   Exercices @relation(fields: [exerciceId], references: [id])
-    exerciceId String
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@id([exerciceId, userId])
 }
 
-model FoodsOnUsers {
-    user   User   @relation(fields: [userId], references: [userId])
-    userId String
 
-    food   Foods  @relation(fields: [foodId], references: [id])
-    foodId String
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@id([foodId, userId])
-}

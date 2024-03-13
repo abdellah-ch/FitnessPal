@@ -4,7 +4,7 @@ import {db} from "./prisma"
 
 export const GetCalorieGoal = async (userId:String) =>{
   
- const {daily} = await db.DailyCalGoal.findUnique({
+ const {daily} = await db.dailyCalGoal.findUnique({
         where: {
           userId:userId
         },
