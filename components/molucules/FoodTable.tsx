@@ -3,7 +3,11 @@ import {FetchUserFood} from "@/lib/FetchUserFood";
 import { currentUserIdClient } from "@/lib/currentUserIdclient";
 import {useState,useEffect} from "react";
 
-const FoodTable = (props:string) =>{
+
+interface propsType {
+  type:string;
+}
+const FoodTable = (props:propsType ) =>{
   let render = false; 
   if(props.type === "breakfast"){
      render = true;
