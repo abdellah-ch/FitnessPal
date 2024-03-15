@@ -1,5 +1,6 @@
 "use client"
 import {useState,useEffect} from "react";
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 import user from "@/public/user.png"
 import { FaNotesMedical } from "react-icons/fa";
@@ -9,7 +10,7 @@ import {GetCalorieGoal} from "@/lib/GetCalorieGoal";
 //import { useCookies } from 'next-client-cookies';
 //install it 
 const DailyBox = () => {
-
+    const router = useRouter();
     const [Daily,SetDaily] = useState<string>("");
     
     useEffect(()=>{
@@ -57,8 +58,12 @@ const DailyBox = () => {
                         <div className="flex flex-col gap-2 lg:flex-row p-3">
                             <span className="text-5xl font-bold text-green-500 md:w-[30%]">{Daily}</span>
                             <div className="flex flex-col gap-2 lg:flex-row lg:w-[70%] ">
-                                <button className=" border-1 text-[#666666] bg-white border-[#D2D2D2] hover:bg-[#B2B2B2] rounded-md px-[20px]  w-[80%] py-1 md:w-[70%]">Add Exercice</button>
-                                <button className=" border-1 text-[#666666] bg-white border-[#D2D2D2] hover:bg-[#B2B2B2] rounded-md px-[20px] w-[80%] py-1 md:w-[70%]">Add Food</button>
+                                <button onClick={()=>router.push("/Exercice")} 
+                                className=" border-1 text-[#666666] bg-white border-[#D2D2D2]
+                                hover:bg-[#B2B2B2] rounded-md px-[20px]  w-[80%] py-1 md:w-[70%]">
+                                  Add Exercice
+                                </button>
+                                <button onClick={()=>router.push("/Food")} className=" border-1 text-[#666666] bg-white border-[#D2D2D2] hover:bg-[#B2B2B2] rounded-md px-[20px] w-[80%] py-1 md:w-[70%]">Add Food</button>
                             </div>
 
                         </div>
