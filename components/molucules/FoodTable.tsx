@@ -6,6 +6,17 @@ import {useState,useEffect} from "react";
 
 interface propsType {
   type:string;
+  
+}
+
+interface foodType {
+  foodName:string;
+  calories:string;
+  carbs:string;
+  fat:string;
+  protein:string;
+  sodium:string;
+  sugar:string;
 }
 const FoodTable = (props:propsType ) =>{
   let render = false; 
@@ -27,7 +38,8 @@ const FoodTable = (props:propsType ) =>{
             <table className="md:w-[920px] w-[400px]">
               <thead>
               <tr >
-                <th className="md:w-[40%] w-[20%] text-left font-bold text-blue-900 md:text-2xl">{props.type}</th>
+                <th className="md:w-[40%] w-[20%] text-left font-bold text-blue-900 md:text-2xl">
+                {props.type}</th>
                 { render ? nutrientHeaders.map((val)=>(
                     <th key={Math.random()} 
                         className="md:p-3 bg-[#00548F] border-white border-[1px] text-white">{val}</th>
@@ -35,15 +47,15 @@ const FoodTable = (props:propsType ) =>{
                 }    
               </tr>
               {/*fetch the food from the db based on type*/
-                  UserFood?UserFood.map((val:any,index)=>(
+                  UserFood?UserFood.map((val:foodType,index)=>(
                      <tr key={Math.random()} className="border-b-[2px] bg-gray-200 text-center">
                        <td key={Math.random()} className="w-[40%] text-left">{val.foodName}</td>
                        <td key={Math.random()} >{val.calories}</td>
-                       <td key={Math.random()} >{val.calories}</td> 
                        <td key={Math.random()} >{val.carbs}</td>
                        <td key={Math.random()} >{val.fat}</td>
                        <td key={Math.random()} >{val.protein}</td>
                        <td key={Math.random()} >{val.sodium}</td>
+                       <td key={Math.random()} >{val.sugar}</td>
                      </tr> 
                   )):null
               }
