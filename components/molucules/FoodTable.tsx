@@ -47,7 +47,7 @@ const FoodTable = (props:propsType ) =>{
                 }    
               </tr>
               {/*fetch the food from the db based on type*/
-                  UserFood?UserFood.map((val:foodType,index)=>(
+                  UserFood?UserFood.map((val:foodType)=>(
                      <tr key={Math.random()} className="border-b-[2px] bg-gray-200 text-center">
                        <td key={Math.random()} className="w-[40%] text-left">{val.foodName}</td>
                        <td key={Math.random()} >{val.calories}</td>
