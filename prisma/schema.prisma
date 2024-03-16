@@ -65,19 +65,14 @@ model Exercices {
     @@id([userId,id])
 }
 
-enum mealType {
-    breakfast
-    lunch
-    dinner
-    snacks
-}
+
 
 model Foods {
     id       Int     
     userId   String   
     foodName     String 
     quantity Int
-    mealtype mealType
+    mealtype String 
     calories Int
     carbs    Int
     fat      Int
