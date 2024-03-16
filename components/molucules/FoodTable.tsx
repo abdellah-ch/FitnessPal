@@ -4,10 +4,10 @@ import { currentUserIdClient } from "@/lib/currentUserIdclient";
 import {useState,useEffect} from "react";
 
 enum mealType {
-    breakfast
-    lunch
-    dinner
-    snacks
+    breakfast;
+    lunch;
+    dinner;
+    snacks;
 }
 interface propsType {
   type:mealType;
