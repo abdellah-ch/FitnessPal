@@ -3,10 +3,14 @@ import {FetchUserFood} from "@/lib/FetchUserFood";
 import { currentUserIdClient } from "@/lib/currentUserIdclient";
 import {useState,useEffect} from "react";
 
-
+enum mealType {
+    breakfast
+    lunch
+    dinner
+    snacks
+}
 interface propsType {
-  type:string;
-  
+  type:mealType;
 }
 
 interface foodType {
