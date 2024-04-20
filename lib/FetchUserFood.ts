@@ -26,6 +26,7 @@ export const FetchUserFood =async (mealtype:string,userId:string) =>{
           sugar:true,
       }
   })
-
+  console.log(foods);
+  
   return foods || undefined;
 }

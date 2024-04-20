@@ -14,11 +14,11 @@ const ageCalculation = (birthdate:string)=>{
 
 const createProfile = async (userId:string,formValues: {[k: string]: FormDataEntryValue},weightUnit:string,heightUnit:string)=>{
  //insert formValues
- let age =  ageCalculation(formValues.birthDate.toString())
+  let age =  ageCalculation(formValues.birthDate.toString())
 
   await db.profile.create({
     data: {
-    bio:"change it later",
+    bio:"Pls Enter your bio",
     weight: Number(formValues.weight) ,    
     weightUnit:weightUnit, 
     height:Number(formValues.height), 

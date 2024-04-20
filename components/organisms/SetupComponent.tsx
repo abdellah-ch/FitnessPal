@@ -22,20 +22,22 @@ const SetupComponent = (props: propsType) => {
         let form_values = Object.fromEntries(formData)
 
         let userId = props.userId
-        DailyCalorieGoal(props.userId).then((res) => {
-                    //window.location.reload()
-            createProfile(userId, form_values, weightUnit, heightUnit)
+        createProfile(userId, form_values, weightUnit, heightUnit)
             .then(() => {
                 //create the daily  
-                    router.push("/account")
+                DailyCalorieGoal(props.userId).then((res) => {
+                    //window.location.reload()
+
+                }).catch(() => {
+                    toast.error('incorret values');
+                })
+                router.push("/account")
             })
             .catch((e) => {
                 toast.error('error refresh the page');
             })
-        }).catch(()=>{
-                  toast.error('incorret values');
-        }) 
-        
+
+
 
     }
     //units
